@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#44f33f00"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="UGG为你服务"
+        android:textColor="#f30000"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:background="@drawable/text_background"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="步数"
+            android:textColor="#9f0000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/bushu"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/et_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="0"
+            android:textColor="#9f0000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="18sp" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bt"
+            android:gravity="center"
+            android:onClick="startOrPause"
+            android:padding="10dp"
+            android:text="启动" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bt"
+            android:gravity="center"
+            android:onClick="stop"
+            android:padding="10dp"
+            android:text="停止" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt"
+            android:gravity="center"
+            android:onClick="clean"
+            android:padding="10dp"
+            android:text="清零" />
+    </LinearLayout>
+	<Button
+	    android:onClick="tishi"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginTop="100dp"
+	    android:text="友提示"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    ></Button>
+</LinearLayout>

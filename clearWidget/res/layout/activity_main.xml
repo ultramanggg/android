@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3300ff00"
+    android:orientation="vertical"
+   	android:padding="10dp"
+   	android:gravity="center"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_background"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="#000000"
+        android:text="一键清理小部件" />
+    
+    <Button 
+        android:onClick="clear"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清理内存"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/title_background"
+        android:gravity="center"
+         android:textColor="#BB000000"
+        android:text="通过桌面添加小部件,实现快捷清理" />
+
+</LinearLayout>

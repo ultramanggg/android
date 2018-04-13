@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/bt"
+        android:onClick="lockScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="106dp"
+        android:layout_marginTop="156dp"
+        android:text="一件锁屏" />
+
+    <Button
+        android:id="@+id/button1"
+        android:onClick="activedveice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bt"
+        android:layout_alignRight="@+id/bt"
+        android:layout_marginBottom="52dp"
+        android:text="激活管理器" />
+
+    <Button
+        android:id="@+id/button2"
+        android:onClick="unInstall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="卸载" />
+
+    <Button
+        android:id="@+id/wipeData"
+        android:onClick="wipeData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/bt"
+        android:layout_below="@+id/button2"
+        android:text="清除数据" />
+
+</RelativeLayout>

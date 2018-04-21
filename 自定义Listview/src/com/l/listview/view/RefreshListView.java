@@ -9,14 +9,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.AbsListView.OnScrollListener;
 import com.l.listview.R;
 
-public class RefreshListView extends ListView {
+public class RefreshListView extends ListView implements OnScrollListener{
 
 	private View header;
 	private ImageView arrow;
@@ -38,12 +39,16 @@ public class RefreshListView extends ListView {
 		super(context, attrs);
 
 		initHeader();
+		initFooterView();
 		initAnimation();
 
 	}
 
 	public RefreshListView(Context context) {
 		super(context);
+		initHeader();
+		initFooterView();
+		initAnimation();
 
 	}
 
@@ -81,6 +86,23 @@ public class RefreshListView extends ListView {
 		rotateUP.setDuration(300);
 		rotateUP.setFillAfter(true);
 
+	}
+	
+	public void initFooterView(){
+		
+		foot = View.inflate(getContext(), R.layout.footer,null);
+		
+		foot.measure(0,0);
+		
+		
+		footheight = foot.getMeasuredHeight();
+		
+		foot.setPadding(0,-footheight,0,0);
+		
+		addFooterView(foot);
+		this.setOnScrollListener(this);
+		
+		
 	}
 
 	@Override
@@ -198,15 +220,25 @@ public class RefreshListView extends ListView {
 	}
 	
 	public void completeRefresh(){
-		header.setPadding(0, -headerHeight, 0, 0);
 		
-		currentState=PUll_REFRESH;
+		if(isLoadingMore){
+			
+			foot.setPadding(0, -footheight, 0, 0);
+			isLoadingMore=false;
+			
+		}else{
+			
+			header.setPadding(0, -headerHeight, 0, 0);
+			
+			currentState=PUll_REFRESH;
+			
+			rotate.setVisibility(INVISIBLE);
+			
+			arrow.setVisibility(VISIBLE);
+			
+			tv.setText("下拉刷新"+":上次更新的时间:"+getCurrentTime());
+		}
 		
-		rotate.setVisibility(INVISIBLE);
-		
-		arrow.setVisibility(VISIBLE);
-		
-		tv.setText("下拉刷新"+":上次更新的时间:"+getCurrentTime());
 		
 	}
 	
@@ -219,6 +251,8 @@ public class RefreshListView extends ListView {
 	}
 	
 	private OnRefreshListener listener;
+	private View foot;
+	private int footheight;
 	
 	public void setRefreshListener(OnRefreshListener listener){
 		this.listener=listener;
@@ -227,6 +261,41 @@ public class RefreshListView extends ListView {
 	public interface OnRefreshListener{
 		
 		public void OnPullRefresh();
+		public void OnLoadingMore();
+	}
+	
+	
+	boolean isLoadingMore=false;
+	
+	
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		
+		//foot.setPadding(0,0, 0, 0);
+		//System.out.println(scrollState+"+++++++++");
+		
+		
+		
+			if(scrollState==OnScrollListener.SCROLL_STATE_IDLE 
+					&& getLastVisiblePosition()==(getCount()-1) &&!isLoadingMore){
+				isLoadingMore = true;
+				
+				foot.setPadding(0, 0, 0, 0);
+				setSelection(getCount());
+				
+				if(listener!=null){
+					listener.OnLoadingMore();
+				}
+			
+			
+			
+		}
+		
+	}
+
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		
+		//System.out.println("滚动");
 	} 
 	
 }

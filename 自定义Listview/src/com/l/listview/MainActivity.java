@@ -17,45 +17,67 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		 final RefreshListView rlv = (RefreshListView) findViewById(R.id.rlv);
-		
+
+		final RefreshListView rlv = (RefreshListView) findViewById(R.id.rlv);
+
 		myAdapter myAdapter = new myAdapter();
-		//View header=View.inflate(this,R.layout.header,null);
+		// View header=View.inflate(this,R.layout.header,null);
 		rlv.setAdapter(myAdapter);
-		//rlv.addHeaderView(header);
-		
-		rlv.setPadding(0,0,0,0);
-		
+		// rlv.addHeaderView(header);
+
+		rlv.setPadding(0, 0, 0, 0);
+
 		rlv.setRefreshListener(new OnRefreshListener() {
-			
+
 			public void OnPullRefresh() {
-				
-				new Thread(){
-					
+
+				new Thread() {
+
 					public void run() {
-						
+
 						SystemClock.sleep(3000);
-						
+
 						System.out.println("更新数据");
 						runOnUiThread(new Runnable() {
-							
+
 							public void run() {
 								rlv.completeRefresh();
-								
+
 							}
 						});
-						
+
 					};
-					
+
 				}.start();
-				
+
+			}
+
+			public void OnLoadingMore() {
+				new Thread() {
+
+					public void run() {
+
+						SystemClock.sleep(3000);
+
+						System.out.println("加载更多");
+						runOnUiThread(new Runnable() {
+
+							public void run() {
+								rlv.completeRefresh();
+
+							}
+						});
+
+					};
+
+				}.start();
+
 			}
 		});
-		
+
 	}
 
-	class myAdapter extends BaseAdapter{
+	class myAdapter extends BaseAdapter {
 
 		public int getCount() {
 			return 20;
@@ -73,23 +95,21 @@ public class MainActivity extends Activity {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v1 = null;
-			
-			if(convertView==null){
-				
-				 v1=View.inflate(MainActivity.this,R.layout.item, null);
-				
-			}else{
-				v1=convertView;
+
+			if (convertView == null) {
+
+				v1 = View.inflate(MainActivity.this, R.layout.item, null);
+
+			} else {
+				v1 = convertView;
 			}
-			
-				TextView  tv=(TextView) v1.findViewById(R.id.tv_i);
-				tv.setText("条目"+position);
-			
-		
-			
+
+			TextView tv = (TextView) v1.findViewById(R.id.tv_i);
+			tv.setText("条目" + position);
+
 			return v1;
 		}
-		
+
 	}
 
 }
